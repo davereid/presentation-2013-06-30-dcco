@@ -1,12 +1,12 @@
 var SLIDE_CONFIG = {
   // Slide settings
   settings: {
-    title: 'Title Goes Here<br>Up To Two Lines',
-    subtitle: 'Subtitle Goes Here',
-    //eventInfo: {
-    //  title: 'Google I/O',
-    //  date: '6/x/2013'
-    //},
+    title: "throw new \\Drupal\\Core<br>\\Initiative\\FileManagement<br>\\FailureException();",
+    //subtitle: 'Subtitle Goes Here',
+    eventInfo: {
+      title: 'DrupalCon Portland',
+      date: '2013-05-21'
+    },
     useBuilds: true, // Default: true. False will turn off slide animation builds.
     usePrettify: true, // Default: true
     enableSlideAreas: true, // Default: true. False turns off the click areas on either slide of the slides.
