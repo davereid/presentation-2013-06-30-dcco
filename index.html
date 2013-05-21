@@ -76,7 +76,294 @@ URL: https://code.google.com/p/io-2012-slides
     </article>
   </slide>
 
+  <slide class="segue dark nobackground">
+    <article class="flexbox vleft auto-fadein">
+      <h2>class FileManagement<br/>implements /Drupal/Core/UnofficialInitiative*</h2>
+      <!--<h3>Subtitle <a href="#">Placeholder</a></h3>
+      <p><a href="#">Link text</a></p>-->
+    </article>
+    <footer class="source">*Note I am not a PSR-0 expert.</footer>
+  </slide>
+
   <slide>
+    <hgroup>
+      <h2>What is the initiative?</h2>
+    </hgroup>
+    <article style="font-size: 30px;">
+      <h3>Goals</h3>
+      <ul>
+        <li><a href="http://drupal.org/node/1291276">Roadmap</a></li>
+        <li>Media bug squad</li>
+        <li>Bi-weekly IRC meetings in #drupal-media</li>
+        <li>Encourage new contributors</li>
+      </ul>
+      <h3>Links</h3>
+      <ul>
+        <li><a href="http://drupal.org/project/file_entity">http://drupal.org/project/file_entity</a></li>
+        <li><a href="http://drupal.org/project/media">http://drupal.org/project/media</a></li>
+        <li><a href="http://groups.drupal.org/media">http://groups.drupal.org/media</a></li>
+        <li><a href="http://www.drupalmedia.org">http://www.drupalmedia.org</a></li>
+        <li>IRC channel: #drupal-media</li>
+      </ul>
+    </article>
+  </slide>
+
+  <slide class="segue dark nobackground">
+    <article class="flexbox vcenter auto-fadein">
+      <h2>What were our goals?<h2>
+    </article>
+  </slide>
+
+  <slide>
+    <aside class="note">
+      <section>
+        <p>Note: Merging Media is not on this list.</p>
+      </section>
+    </aside>
+    <hgroup>
+      <h2>What were our goals?</h2>
+    </hgroup>
+    <article style="font-size: 35px;">
+      <ul class="build">
+        <li>Configurable file types</li>
+        <li>Guided file upload</li>
+        <li>HTML5 file upload</li>
+        <li>File access API</li>
+        <li>File metadata API</li>
+        <li>Improved accessiblity with alt/title fields</li>
+        <li>HTML5 for audio/video</li>
+        <li>Improved support for remote files</li>
+        <li>Fix assumptions/data from file/image fields</li>
+      </ul>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>Goals: Configurable file types</h2>
+      <h3>File entity: DONE!; Core: Merge in D9</h3>
+    </hgroup>
+    <article>
+      <iframe data-src="http://drupal7.dev/admin/structure/file-types"></iframe>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>Goals: Wizard file upload</h2>
+      <h3>File entity: DONE!; Core: Merge in D9</h3>
+    </hgroup>
+    <article>
+      <iframe data-src="http://drupal7.dev/file/add"></iframe>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>Goals: HTML5 file upload</h2>
+      <h3>File entity: In progress; Core: In progress</h3>
+    </hgroup>
+    <article style="font-size: 35px;">
+      <ul>
+        <li>DONE: #multiple is supported by D8 'file' FAPI and field widgets</li>
+        <li>Drag &amp; drop: <a href="http://drupal.org/node/1683838">http://drupal.org/node/1683838</a></li>
+      </ul>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>Goals: File access API</h2>
+      <h3>File entity: 90%; Core: 75%</h3>
+    </hgroup>
+    <article>
+      <pre class="prettyprint" data-lang="php">
+file_entity_access('view', $file, $account);
+
+function hook_file_entity_access($op, $file, $account) {
+  $type = is_string($file) ? $file : $file->type;
+
+  if ($op !== 'create' && (REQUEST_TIME - $file->timestamp) < 3600) {
+    // If the file was uploaded in the last hour, deny access to it.
+    return FILE_ENTITY_ACCESS_DENY;
+  }
+
+  // Returning nothing from this function would have the same effect.
+  return FILE_ENTITY_ACCESS_IGNORE;
+}
+
+function hook_query_file_entity_access_alter(QueryAlterableInterface $query) {
+  // Only show files that have been uploaded more than an hour ago.
+  $query->condition('timestamp', REQUEST_TIME - 3600, '<=');
+}
+</pre>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>Goals: File metadata API</h2>
+      <h3>File entity: In progress; Core: D8?</h3>
+    </hgroup>
+    <article>
+      <p>Non-editable data in key/value storage. Remove metadata from field storage.</p>
+      <p>Image dimensions example:</p>
+      <pre class="prettyprint" data-lang="php">
+// Before
+$file->image_dimensions['width'] = 300;
+$file->image_dimensions['height'] = 200;
+
+// After
+$file->data['width'] = 300;
+$file->data['height'] = 200;
+
+hook_file_metadata_info() {
+  $info['width']  = array('label' => t('Width'));
+  $info['height'] = array('label' => t('Height'));
+  return $info;
+}
+</pre>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>Goals: Improved accessiblity with alt/title fields</h2>
+      <h3>File entity: 90%; Core: Merge in D9</h3>
+    </hgroup>
+    <article>
+      <iframe data-src="http://drupal7.dev/admin/structure/file-types/manage/image/fields"></iframe>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>Goals: HTML5 for audio/video</h2>
+      <h3>File entity: In progress; Core: Merge in D9</h3>
+    </hgroup>
+    <article style="font-size: 35px;">
+      <ul>
+        <li>Plan to support simple &lt;audio&gt; and &lt;video&gt; for file fields.</li>
+        <li>Support multiple &lt;track&gt; elements with field cardinatlity.</li>
+      </ul>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>Goals: Improved support for remote files</h2>
+      <h3>Core: DONE!</h3>
+    </hgroup>
+    <article style="font-size: 35px;">
+      <ul>
+        <li>\Drupal\Core\StreamWrapper\ReadOnlyStream</li>
+        <li>\Drupal\Core\StreamWrapper\LocalReadOnlyStream</li>
+        <li>Nice to have: <a href="http://drupal.org/node/1308152">system stream wrappers</a>:
+          <ul>
+            <li>module://views/css/file.css</li>
+            <li>theme://admin/js/admin.js</li>
+            <li>profile://default/css/default.css</li>
+          </ul>
+        </li>
+      </ul>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>Goals: Fix assumptions/data from file/image fields</h2>
+      <h3>Core: In progress</h3>
+    </hgroup>
+    <article style="font-size: 35px;">
+      <ul>
+        <li>DONE: Fix file_field_load() has to load file entities: <a href="http://drupal.org/node/1446464">http://drupal.org/node/1446464</a></li>
+        <li>Make unused file cleanup optional: <a href="http://drupal.org/node/1399846">http://drupal.org/node/1399846</a></li>
+        <li>Reuse entity reference fields: <a href="http://drupal.org/node/1847594">http://drupal.org/node/1847594</a> <a href="http://drupal.org/node/1968442">http://drupal.org/node/1968442</a></li>
+      </ul>
+    </article>
+  </slide>
+
+  <slide class="segue dark nobackground">
+    <article class="flexbox vcenter auto-fadein">
+      <h2>Why did we not accomplish our goals?<h2>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>Why did we not accomplish our goals?</h2>
+    </hgroup>
+    <article style="font-size: 40px;">
+      <ul>
+        <li>Lead had a baby</li>
+        <li>Resources</li>
+        <li>Meetings</li>
+      </ul>
+    </article>
+  </slide>
+
+  <slide class="segue dark nobackground">
+    <article class="flexbox vcenter auto-fadein">
+      <h2>Can we still accomplish what we wanted to from contrib for Drupal 8?<h2>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>Drupal 8 todos</h2>
+    </hgroup>
+    <article style="font-size: 40px;">
+      <ul>
+        <li>Metadata API in D8 core.</li>
+        <li>Finish file entity in D8 contrib.</li>
+        <li>Polish and revamp Media browser UI.</li>
+      </ul>
+    </article>
+  </slide>
+
+  <slide class="segue dark nobackground">
+    <article class="flexbox vcenter auto-fadein">
+      <h2>What are our plans to improve things in Drupal 9?<h2>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>Drupal 9 todos</h2>
+    </hgroup>
+    <article style="font-size: 40px;">
+      <ul>
+        <li>Merge file entity into core's file module - EARLY.</li>
+        <li>Merge media into core???</li>
+      </ul>
+    </article>
+  </slide>
+
+  <slide class="segue dark nobackground">
+    <article class="flexbox vcenter auto-fadein">
+      <h2>WE NEED HELP!<h2>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>When can you help?</h2>
+    </hgroup>
+    <article class="auto-fadein" style="font-size: 40px;">
+      <ul>
+        <li>Code sprints
+          <ul>
+            <li>Friday, May 24, 2013<br />DrupalCon Portland</li>
+            <li>Sunday, Aug 11, 2013<br />DrupalCorn, Iowa City, Iowa</li>
+          </ul>
+        </li>
+        <li>Next Thursday 20:00 UTC IRC meeting in #drupal-media </li>
+        <li><strong>ANYTIME!</strong></li>
+      </ul>
+    </article>
+  </slide>
+
+  <slide hidden>
     <hgroup>
       <h2>Slide with Bullets</h2>
     </hgroup>
@@ -94,7 +381,7 @@ URL: https://code.google.com/p/io-2012-slides
     </article>
   </slide>
 
-  <slide>
+  <slide hidden>
     <hgroup>
       <h2>Slide with Bullets that Build</h2>
       <h3>Subtitle Placeholder</h3>
@@ -118,7 +405,7 @@ URL: https://code.google.com/p/io-2012-slides
     </article>
   </slide>
 
-  <slide>
+  <slide hidden>
     <hgroup>
       <h2>Slide with (Smaller Font)</h2>
     </hgroup>
@@ -134,7 +421,7 @@ URL: https://code.google.com/p/io-2012-slides
     Hidden slides are left out of the presentation.
   </slide>
 
-  <slide>
+  <slide hidden>
     <hgroup>
       <h2>Code Slide (with Subtitle Placeholder)</h2>
       <h3>Subtitle Placeholder</h3>
@@ -155,7 +442,7 @@ URL: https://code.google.com/p/io-2012-slides
     </article>
   </slide>
 
-  <slide>
+  <slide hidden>
     <hgroup>
       <h2>Code Slide (Smaller Font)</h2>
     </hgroup>
@@ -184,7 +471,7 @@ function testPHP(/Drupal/entity $argument = NULL) {
     </article>
   </slide>
 
-  <slide>
+  <slide hidden>
     <aside class="note">
       <section>
         <ul>
@@ -204,7 +491,7 @@ function testPHP(/Drupal/entity $argument = NULL) {
     </article>
   </slide>
 
-  <slide>
+  <slide hidden>
     <aside class="note">
       <section>
         <ul>
@@ -224,7 +511,7 @@ function testPHP(/Drupal/entity $argument = NULL) {
     </article>
   </slide>
 
-  <slide>
+  <slide hidden>
     <hgroup>
       <h2>Slide with Image</h2>
     </hgroup>
@@ -234,7 +521,7 @@ function testPHP(/Drupal/entity $argument = NULL) {
     </article>
   </slide>
 
-  <slide>
+  <slide hidden>
     <hgroup>
       <h2>Slide with Image (Centered horz/vert)</h2>
     </hgroup>
@@ -244,7 +531,7 @@ function testPHP(/Drupal/entity $argument = NULL) {
     </article>
   </slide>
 
-  <slide>
+  <slide hidden>
     <hgroup>
       <h2>Table Option A</h2>
       <h3>Subtitle Placeholder</h3>
@@ -273,7 +560,7 @@ function testPHP(/Drupal/entity $argument = NULL) {
     </article>
   </slide>
 
-  <slide>
+  <slide hidden>
     <hgroup>
       <h2>Table Option A (Smaller Text)</h2>
       <h3>Subtitle Placeholder</h3>
@@ -302,7 +589,7 @@ function testPHP(/Drupal/entity $argument = NULL) {
     </article>
   </slide>
 
-  <slide>
+  <slide hidden>
     <hgroup>
       <h2>Table Option B</h2>
       <h3>Subtitle Placeholder</h3>
@@ -328,7 +615,7 @@ function testPHP(/Drupal/entity $argument = NULL) {
     </article>
   </slide>
 
-  <slide>
+  <slide hidden>
     <hgroup>
       <h2>Slide Styles</h2>
     </hgroup>
@@ -361,7 +648,7 @@ function testPHP(/Drupal/entity $argument = NULL) {
     </article>
   </slide>
 
-  <slide class="segue dark nobackground">
+  <slide hidden class="segue dark nobackground">
     <aside class="gdbar"><img src="images/portland2013/portland-icon.png"></aside>
     <hgroup class="auto-fadein">
       <h2>Segue Slide</h2>
@@ -370,14 +657,14 @@ function testPHP(/Drupal/entity $argument = NULL) {
     </hgroup>
   </slide>
 
-  <slide class="fill nobackground" style="background-image: url(images/portland2013/evaluate.png)">
+  <slide hidden class="fill nobackground" style="background-image: url(images/portland2013/evaluate.png)">
     <hgroup>
       <h2 class="white">Full Image (with Optional Header)</h2>
     </hgroup>
     <footer class="source white">www.flickr.com/photos/25797459@N06/5438799763/</footer>
   </slide>
 
-  <slide class="segue dark quote nobackground">
+  <slide hidden class="segue dark quote nobackground">
     <aside class="gdbar right bottom"><img src="images/portland2013/portland-icon.png"></aside>
     <article class="flexbox vleft auto-fadein">
       <q>
@@ -390,7 +677,7 @@ function testPHP(/Drupal/entity $argument = NULL) {
     </article>
   </slide>
 
-  <slide>
+  <slide hidden>
     <hgroup>
       <h2>Slide with Iframe</h2>
     </hgroup>
@@ -399,7 +686,7 @@ function testPHP(/Drupal/entity $argument = NULL) {
     </article>
   </slide>
 
-  <slide>
+  <slide hidden>
     <article>
       <iframe data-src="http://www.google.com/doodle4google/resources/history.html"></iframe>
     </article>
@@ -408,7 +695,7 @@ function testPHP(/Drupal/entity $argument = NULL) {
   <slide class="thank-you-slide segue nobackground">
     <aside class="gdbar right"><img src="images/portland2013/portland-icon.png"></aside>
     <article class="flexbox vleft auto-fadein">
-      <h2>Thank You! Now let's discuss.</h2>
+      <h2>Thank You!<br />Now let's discuss.</h2>
       <p>Evaluate this session at: <a href="http://portland2013.drupal.org/schedule">portland2013.drupal.org/schedule</a></p>
     </article>
     <p class="auto-fadein" data-config-contact>
@@ -416,7 +703,7 @@ function testPHP(/Drupal/entity $argument = NULL) {
     </p>
   </slide>
 
-  <slide class="logoslide dark nobackground">
+  <slide class="logoslide nobackground">
     <article class="flexbox vcenter">
       <div style="margin-bottom: 1em;"><img src="images/portland2013/portland-title.png"></div>
       <div style="margin-top: 1em;"><img src="images/palantir/palantirnet-logo-2013.svg" width="500"/></div>

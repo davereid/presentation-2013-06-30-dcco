@@ -1,7 +1,22 @@
 @charset "UTF-8";
-@import "compass/css3/font-face";
 
-@include font-face('Proxima Nova Regular', font-files(
-  "ProximaNova/Proxima Nova-Regular.otf",
-  "ProximaNova/Proxima Nova-Bold.otf"
-));
+@font-face {
+  font-family: 'Proxima Nova';
+  src: url('../../fonts/ProximaNova/Proxima Nova-Semibold.otf') format('opentype');
+}
+@font-face {
+  font-family: 'Proxima Nova';
+  font-style: italic;
+  src: url('../../fonts/ProximaNova/Proxima Nova-SemiboldItalic.otf') format('opentype');
+}
+@font-face {
+  font-family: 'Proxima Nova';
+  font-weight: bold;
+  src: url('../../fonts/ProximaNova/Proxima Nova-Bold.otf') format('opentype');
+}
+@font-face {
+  font-family: 'Proxima Nova';
+  font-weight: bold;
+  font-style: italic;
+  src: url('../../fonts/ProximaNova/Proxima Nova-BoldIt.otf') format('opentype');
+}
