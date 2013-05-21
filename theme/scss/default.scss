@@ -1,4 +1,5 @@
 @import "base";
+@import "fonts";
 @import "compass/css3/columns";
 @import "compass/css3/user-interface";
 
@@ -61,7 +62,7 @@ body {
 
 slides > slide {
   display: none;
-  font-family: 'Open Sans', Arial, sans-serif;
+  font-family: 'Proxima Nova Regular', 'Open Sans', Arial, sans-serif;
   font-size: 26px;
   color: $gray-3;
   //@include background(linear-gradient(white, white 85%, $gray-1));
