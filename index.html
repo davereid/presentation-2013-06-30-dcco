@@ -75,8 +75,6 @@ URL: https://code.google.com/p/io-2012-slides
   <slide class="segue dark nobackground">
     <article class="flexbox vleft auto-fadein">
       <h2>What is File Entity?</h2>
-      <!--<h3>Subtitle <a href="#">Placeholder</a></h3>
-      <p><a href="#">Link text</a></p>-->
     </article>
   </slide>
 
@@ -84,28 +82,173 @@ URL: https://code.google.com/p/io-2012-slides
     <hgroup>
       <h2>What is File Entity?</h2>
     </hgroup>
-    <article style="font-size: 40px;">
+    <article style="font-size: 50px;">
       <ul class="build">
         <li>UI for adding and managing files as individual items</li>
         <li>File types</li>
         <li>Allows you to add fields to files</li>
-        <li>Basically, try to fix the crap in core</li>
+        <li>Fix core assumptions</li>
       </ul>
     </article>
   </slide>
 
   <slide class="segue dark nobackground">
     <article class="flexbox vleft auto-fadein">
-      <h2>OMZG NEW 2.X THINGS!</h2>
+      <h2>ZOMG NEW 2.X THINGS!</h2>
     </article>
   </slide>
 
   <slide>
     <hgroup>
-      <h2>OMZG NEW: Configurable file types</h2>
+      <h2>ZOMG NEW: Configurable file types</h2>
     </hgroup>
     <article>
       <iframe data-src="http://drupal7.dev/admin/structure/file-types"></iframe>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>ZOMG NEW: Upload UX</h2>
+    </hgroup>
+    <article>
+      <iframe data-src="http://drupal7.dev/file/add"></iframe>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>ZOMG NEW: Accessibility</h2>
+    </hgroup>
+    <article>
+      <iframe data-src="http://drupal7.dev/admin/structure/file-types/manage/image/fields"></iframe>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>ZOMG NEW: Accessibility</h2>
+    </hgroup>
+    <article>
+      <iframe data-src="http://drupal7.dev/admin/structure/file-types/manage/image/file-display"></iframe>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>ZOMG NEW: File replacement</h2>
+    </hgroup>
+    <article>
+      <iframe data-src="http://drupal7.dev/file/17/edit?destination=node/1"></iframe>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>ZOMG NEW: File access API</h2>
+    </hgroup>
+    <article>
+      <pre class="prettyprint" data-lang="php" style="font-size: 16px; line-height: 1.1em; font-stretch: condensed;">
+file_entity_access('view', $file, $account);
+
+function hook_file_entity_access($op, $file, $account) {
+  $type = is_string($file) ? $file : $file->type;
+
+  if ($op !== 'create' && (REQUEST_TIME - $file->timestamp) < 3600) {
+    // If the file was uploaded in the last hour, deny access to it.
+    return FILE_ENTITY_ACCESS_DENY;
+  }
+
+  // Returning nothing from this function would have the same effect.
+  return FILE_ENTITY_ACCESS_IGNORE;
+}
+
+function hook_query_file_entity_access_alter(QueryAlterableInterface $query) {
+  // Only show files that have been uploaded more than an hour ago.
+  $query->condition('timestamp', REQUEST_TIME - 3600, '<=');
+}
+</pre>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>ZOMG NEW: File metadata API</h2>
+    </hgroup>
+    <article>
+      <p>Non-editable data in key/value storage. Remove metadata from field storage.</p>
+      <p>Image dimensions example:</p>
+      <pre class="prettyprint" data-lang="php" style="font-size: 18px; line-height: 1.1em; font-stretch: condensed;">
+// Before
+$file->image_dimensions['width'] = 300;
+$file->image_dimensions['height'] = 200;
+
+// After
+$file->data['width'] = 300;
+$file->data['height'] = 200;
+
+hook_file_metadata_info() {
+  $info['width']  = array('label' => t('Width'));
+  $info['height'] = array('label' => t('Height'));
+  return $info;
+}
+</pre>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>ZOMG NEW: Misc</h2>
+    </hgroup>
+    <article style="font-size: 30px;">
+      <ul>
+        <li>Download link formatter</li>
+        <li>Views field handlers, filters, sorts</li>
+        <li>URL alias support, including Pathauto</li>
+      </ul>
+    </article>
+  </slide>
+
+  <slide class="segue dark nobackground">
+    <article class="flexbox vleft auto-fadein">
+      <h2>What's left in File entity to do?</h2>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>File entity: What's left?</h2>
+    </hgroup>
+    <article style="font-size: 40px;">
+      <ul class="build">
+        <li>HTML5 simple formatters</li>
+        <li>HTML5 uploading (Plupload for reals)</li>
+        <li>File usage fix in core</li>
+        <li>Ensure access API works with queries</li>
+        <li>Cleanup, document</li>
+        <li>Prepare for D9 merge</li>
+      </ul>
+    </article>
+  </slide>
+
+  <slide class="segue dark nobackground">
+    <article class="flexbox vleft auto-fadein">
+      <h2>What is Media?</h2>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>What is Media?</h2>
+    </hgroup>
+    <article style="font-size: 50px;">
+      <ul class="build">
+        <li>Media widget for file/image fields</li>
+        <li>Media browser</li>
+        <li>Web files</li>
+        <li>WYSIWYG integration w/ usage tracking</li>
+        <li><del>Media field type</del></li>
+      </ul>
     </article>
   </slide>
 
@@ -199,61 +342,6 @@ URL: https://code.google.com/p/io-2012-slides
         <li>DONE: #multiple is supported by D8 'file' FAPI and field widgets</li>
         <li>Drag &amp; drop: <a href="http://drupal.org/node/1683838">http://drupal.org/node/1683838</a></li>
       </ul>
-    </article>
-  </slide>
-
-  <slide>
-    <hgroup>
-      <h2>Goals: File access API</h2>
-      <h3>File entity: 90%; Core: 75%</h3>
-    </hgroup>
-    <article>
-      <pre class="prettyprint" data-lang="php">
-file_entity_access('view', $file, $account);
-
-function hook_file_entity_access($op, $file, $account) {
-  $type = is_string($file) ? $file : $file->type;
-
-  if ($op !== 'create' && (REQUEST_TIME - $file->timestamp) < 3600) {
-    // If the file was uploaded in the last hour, deny access to it.
-    return FILE_ENTITY_ACCESS_DENY;
-  }
-
-  // Returning nothing from this function would have the same effect.
-  return FILE_ENTITY_ACCESS_IGNORE;
-}
-
-function hook_query_file_entity_access_alter(QueryAlterableInterface $query) {
-  // Only show files that have been uploaded more than an hour ago.
-  $query->condition('timestamp', REQUEST_TIME - 3600, '<=');
-}
-</pre>
-    </article>
-  </slide>
-
-  <slide>
-    <hgroup>
-      <h2>Goals: File metadata API</h2>
-      <h3>File entity: In progress; Core: D8?</h3>
-    </hgroup>
-    <article>
-      <p>Non-editable data in key/value storage. Remove metadata from field storage.</p>
-      <p>Image dimensions example:</p>
-      <pre class="prettyprint" data-lang="php">
-// Before
-$file->image_dimensions['width'] = 300;
-$file->image_dimensions['height'] = 200;
-
-// After
-$file->data['width'] = 300;
-$file->data['height'] = 200;
-
-hook_file_metadata_info() {
-  $info['width']  = array('label' => t('Width'));
-  $info['height'] = array('label' => t('Height'));
-  return $info;
-}
-</pre>
     </article>
   </slide>
 
