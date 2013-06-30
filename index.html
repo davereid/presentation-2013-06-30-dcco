@@ -40,7 +40,7 @@ URL: https://code.google.com/p/io-2012-slides
       <h1 data-config-title><!-- populated from slide_config.json --></h1>
       <h2 data-config-subtitle><!-- populated from slide_config.json --></h2>
       <p data-config-presenter><!-- populated from slide_config.json --></p>
-      <p>Follow along with <a href="http://davereid.github.io/presentation-2013-06-30-dcco">http://davereid.github.io/presentation-2013-06-30-dcco</a></p>
+      <p>Follow along with <a href="http://davereid.github.io/presentation-2013-06-30-dcco">http://davereid.github.io/presentation-2013-06-30-dcco</a><br/><blink style="font-size: 0.75em; font-weight: bold;">WARNING: PRESENTATION DOES NOT CONTAIN SUFFICIENT AMOUNT OF LOLCATS!</blink></p>
     </hgroup>
   </slide>
 
@@ -82,7 +82,7 @@ URL: https://code.google.com/p/io-2012-slides
     <hgroup>
       <h2>What is File Entity?</h2>
     </hgroup>
-    <article style="font-size: 50px;">
+    <article style="font-size: 40px;">
       <ul class="build">
         <li>UI for adding and managing files as individual items</li>
         <li>File types</li>
@@ -198,9 +198,9 @@ hook_file_metadata_info() {
 
   <slide>
     <hgroup>
-      <h2>ZOMG NEW: Misc</h2>
+      <h2>NEW: Misc</h2>
     </hgroup>
-    <article style="font-size: 30px;">
+    <article style="font-size: 40px;">
       <ul>
         <li>Download link formatter</li>
         <li>Views field handlers, filters, sorts</li>
@@ -211,7 +211,7 @@ hook_file_metadata_info() {
 
   <slide class="segue dark nobackground">
     <article class="flexbox vleft auto-fadein">
-      <h2>What's left in File entity to do?</h2>
+      <h2>What's left in File Entity to do?</h2>
     </article>
   </slide>
 
@@ -226,7 +226,7 @@ hook_file_metadata_info() {
         <li>File usage fix in core</li>
         <li>Ensure access API works with queries</li>
         <li>Cleanup, document</li>
-        <li>Prepare for D9 merge</li>
+        <li>Port to D8 and prepare for D9 merge early</li>
       </ul>
     </article>
   </slide>
@@ -241,7 +241,7 @@ hook_file_metadata_info() {
     <hgroup>
       <h2>What is Media?</h2>
     </hgroup>
-    <article style="font-size: 50px;">
+    <article style="font-size: 40px;">
       <ul class="build">
         <li>Media widget for file/image fields</li>
         <li>Media browser</li>
@@ -249,6 +249,110 @@ hook_file_metadata_info() {
         <li>WYSIWYG integration w/ usage tracking</li>
         <li><del>Media field type</del></li>
       </ul>
+    </article>
+  </slide>
+
+  <slide class="segue dark nobackground">
+    <article class="flexbox vleft auto-fadein">
+      <h2>ZOMG NEW 2.X THINGS AGAIN YAY!</h2>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>NEW: Views-powered browser</h2>
+    </hgroup>
+    <article>
+      <iframe data-src="http://drupal7.dev/admin/structure/views/view/media_default/edit/media_browser_1"></iframe>
+    </article>
+  </slide>
+
+  <slide>
+    <article class="flexbox vleft auto-fadein">
+      <h2>Disappointing slide is disappointing</h2>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>NEW: OMZG COMPETITORS!</h2>
+    </hgroup>
+    <article>
+      <iframe data-src="https://drupal.org/project/scald"></iframe>
+    </article>
+  </slide>
+
+  <slide class="segue dark nobackground">
+    <article class="flexbox vleft auto-fadein">
+      <h2>What's left in Media to do?</h2>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>Media: What's left?</h2>
+    </hgroup>
+    <article style="font-size: 40px;">
+      <ul class="build">
+        <li>Fix integration with CKEditor 4+</li>
+        <li>Improved UX for uploading and browsing in content</li>
+      </ul>
+    </article>
+  </slide>
+
+  <slide class="segue dark nobackground">
+    <article class="flexbox vleft auto-fadein">
+      <h2>Cool stuff happening in Media ecosystem</h2>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>Cool: <a href="https://drupal.org/project/file_entity_inline">File entity inline</a></h2>
+    </hgroup>
+    <article>
+      <iframe data-src="https://drupal.org/project/file_entity_inline"></iframe>
+      <footer class="source"><a href="https://drupal.org/project/file_entity_inline">https://drupal.org/project/file_entity_inline</a></footer>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>Cool: <a href="https://drupal.org/project/fe_paths">File entity paths</a></h2>
+    </hgroup>
+    <article>
+      <iframe data-src="https://drupal.org/project/fe_paths"></iframe>
+      <footer class="source"><a href="https://drupal.org/project/fe_paths">https://drupal.org/project/fe_paths</a></footer>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>Cool: <a href="https://drupal.org/project/file_lock">File lock</a></h2>
+    </hgroup>
+    <article>
+      <iframe data-src="https://drupal.org/project/file_lock"></iframe>
+      <footer class="source"><a href="https://drupal.org/project/file_lock">https://drupal.org/project/file_lock</a></footer>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>Cool: <a href="https://drupal.org/project/remote_stream_wrapper">Remote stream wrapper</a></h2>
+    </hgroup>
+    <article>
+      <iframe data-src="https://drupal.org/project/remote_stream_wrapper"></iframe>
+      <footer class="source"><a href="https://drupal.org/project/remote_stream_wrapper">https://drupal.org/project/remote_stream_wrapper</a></footer>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>Cool: <a href="https://drupal.org/project/oembed">oEmbed</a></h2>
+    </hgroup>
+    <article>
+      <iframe data-src="https://drupal.org/project/oembed"></iframe>
+      <footer class="source"><a href="https://drupal.org/project/oembed">https://drupal.org/project/oembed</a></footer>
     </article>
   </slide>
 
@@ -263,11 +367,10 @@ hook_file_metadata_info() {
     <hgroup>
       <h2>What is the initiative?</h2>
     </hgroup>
-    <article style="font-size: 30px;">
+    <article style="font-size: 25px;">
       <h3>Goals</h3>
       <ul>
-        <li><a href="http://drupal.org/node/1291276">Roadmap</a></li>
-        <li>Media bug squad</li>
+        <li>Consistent roadmap</li>
         <li>Bi-weekly IRC meetings in #drupal-media</li>
         <li>Encourage new contributors</li>
       </ul>
@@ -282,13 +385,13 @@ hook_file_metadata_info() {
     </article>
   </slide>
 
-  <slide class="segue dark nobackground">
+  <slide hidden class="segue dark nobackground">
     <article class="flexbox vcenter auto-fadein">
       <h2>What were our goals?<h2>
     </article>
   </slide>
 
-  <slide>
+  <slide hidden>
     <aside class="note">
       <section>
         <p>Note: Merging Media is not on this list.</p>
@@ -312,7 +415,7 @@ hook_file_metadata_info() {
     </article>
   </slide>
 
-  <slide>
+  <slide hidden>
     <hgroup>
       <h2>Goals: Configurable file types</h2>
       <h3>File entity: DONE!; Core: Merge in D9</h3>
@@ -322,7 +425,7 @@ hook_file_metadata_info() {
     </article>
   </slide>
 
-  <slide>
+  <slide hidden>
     <hgroup>
       <h2>Goals: Wizard file upload</h2>
       <h3>File entity: DONE!; Core: Merge in D9</h3>
@@ -332,7 +435,7 @@ hook_file_metadata_info() {
     </article>
   </slide>
 
-  <slide>
+  <slide hidden hidden>
     <hgroup>
       <h2>Goals: HTML5 file upload</h2>
       <h3>File entity: In progress; Core: In progress</h3>
@@ -345,7 +448,7 @@ hook_file_metadata_info() {
     </article>
   </slide>
 
-  <slide>
+  <slide hidden>
     <hgroup>
       <h2>Goals: Improved accessiblity with alt/title fields</h2>
       <h3>File entity: 90%; Core: Merge in D9</h3>
@@ -355,7 +458,7 @@ hook_file_metadata_info() {
     </article>
   </slide>
 
-  <slide>
+  <slide hidden>
     <hgroup>
       <h2>Goals: HTML5 for audio/video</h2>
       <h3>File entity: In progress; Core: Merge in D9</h3>
@@ -368,7 +471,7 @@ hook_file_metadata_info() {
     </article>
   </slide>
 
-  <slide>
+  <slide hidden>
     <hgroup>
       <h2>Goals: Improved support for remote files</h2>
       <h3>Core: DONE!</h3>
@@ -388,7 +491,7 @@ hook_file_metadata_info() {
     </article>
   </slide>
 
-  <slide>
+  <slide hidden>
     <hgroup>
       <h2>Goals: Fix assumptions/data from file/image fields</h2>
       <h3>Core: In progress</h3>
@@ -402,13 +505,13 @@ hook_file_metadata_info() {
     </article>
   </slide>
 
-  <slide class="segue dark nobackground">
+  <slide hidden class="segue dark nobackground">
     <article class="flexbox vcenter auto-fadein">
       <h2>Why did we not accomplish our goals?<h2>
     </article>
   </slide>
 
-  <slide>
+  <slide hidden>
     <hgroup>
       <h2>Why did we not accomplish our goals?</h2>
     </hgroup>
@@ -421,13 +524,13 @@ hook_file_metadata_info() {
     </article>
   </slide>
 
-  <slide class="segue dark nobackground">
+  <slide hidden class="segue dark nobackground">
     <article class="flexbox vcenter auto-fadein">
       <h2>Can we still accomplish what we wanted to from contrib for Drupal 8?<h2>
     </article>
   </slide>
 
-  <slide>
+  <slide hidden>
     <hgroup>
       <h2>Drupal 8 todos</h2>
     </hgroup>
@@ -440,13 +543,13 @@ hook_file_metadata_info() {
     </article>
   </slide>
 
-  <slide class="segue dark nobackground">
+  <slide hidden class="segue dark nobackground">
     <article class="flexbox vcenter auto-fadein">
       <h2>What are our plans to improve things in Drupal 9?<h2>
     </article>
   </slide>
 
-  <slide>
+  <slide hidden>
     <hgroup>
       <h2>Drupal 9 todos</h2>
     </hgroup>
@@ -458,7 +561,7 @@ hook_file_metadata_info() {
     </article>
   </slide>
 
-  <slide class="segue dark nobackground">
+  <slide hidden class="segue dark nobackground">
     <article class="flexbox vcenter auto-fadein">
       <h2>WE NEED HELP!<h2>
     </article>
@@ -468,12 +571,13 @@ hook_file_metadata_info() {
     <hgroup>
       <h2>When can you help?</h2>
     </hgroup>
-    <article class="auto-fadein" style="font-size: 40px;">
+    <article class="auto-fadein" style="font-size: 35px;">
       <ul>
         <li>Code sprints
           <ul>
-            <li>Friday, May 24, 2013<br />DrupalCon Portland</li>
-            <li>Sunday, Aug 11, 2013<br />DrupalCorn, Iowa City, Iowa</li>
+            <li>July 21, 2013: DrupalCamp Twin Cities, Minneapolis MN</li>
+            <li>Aug 11, 2013: DrupalCorn, Iowa City IA</li>
+            <li>Aug 15-17, 2013: Midwest Developer Summit, Chicago IL</li>
           </ul>
         </li>
         <li>Next Thursday 20:00 UTC IRC meeting in #drupal-media </li>
