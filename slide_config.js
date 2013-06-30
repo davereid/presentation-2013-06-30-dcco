@@ -1,11 +1,11 @@
 var SLIDE_CONFIG = {
   // Slide settings
   settings: {
-    title: "throw new \\Drupal\\Core<br>\\Initiative\\FileManagement<br>\\FailureException();",
+    title: "Current state of File Entity<br>and Media 2.x",
     //subtitle: 'Subtitle Goes Here',
     eventInfo: {
-      title: 'DrupalCon Portland',
-      date: '2013-05-21'
+      title: 'DrupalCamp Colorado 2013',
+      date: '2013-06-30'
     },
     useBuilds: true, // Default: true. False will turn off slide animation builds.
     usePrettify: true, // Default: true
@@ -29,7 +29,7 @@ var SLIDE_CONFIG = {
     company: 'Senior Engineer<br>Palantir.net',
     //gplus: 'http://plus.google.com/1234567890',
     twitter: '@davereid',
-    www: 'http://www.daveried.net'
+    www: 'http://www.davereid.net'
     //github: 'http://github.com/davereid'
   }/*, {
     name: 'Second Name',
