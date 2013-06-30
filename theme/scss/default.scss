@@ -373,11 +373,12 @@ code {
 }
 
 iframe {
-  width: 100%;
-  height: $slide-height - ($slide-top-bottom-padding * 6) - ($article-content-top-padding * 2);
+  width: 110%;
+  height: $slide-height - ($slide-top-bottom-padding * 4) - ($article-content-top-padding * 2);
   background: white;
   border: 1px solid $gray-1;
   @include box-sizing(border-box);
+  margin-left: -5%;
 }
 
 dt {
@@ -897,11 +898,11 @@ aside.gdbar {
 .title-slide {
 
   hgroup {
-    bottom: 100px;
+    bottom: 50px;
 
     h1 {
-      font-size: 70px;
-      line-height: 1.1;
+      font-size: 60px;
+      line-height: 1.0;
       letter-spacing: -3px;
       color: $gray-4;
       font-weight: bold;
